@@ -8,19 +8,13 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="../static/default.css" th:href="@{/css/login.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/default.css" th:href="@{/css/nabvar1.css}"/>
     <title>Title</title>
 </head>
 <body>
-<!--<h1>Tutaj bedzie formularz do logowania</h1>-->
 
-<!--<form th:action="@{/login}" method="post">-->
-    <!--<div><label> User Name : <input type="text" name="username"/> </label></div>-->
-    <!--<div><label> Password: <input type="password" name="password"/> </label></div>-->
-    <!--<div><input type="submit" value="Sign In"/></div>-->
-<!--</form>-->
-
-
-
+<nav th:replace="layout::top-navbar-1Layer" />
+<nav th:replace="layout::top-navbar-2Layer" />
 
 
 <div class="container">
@@ -60,7 +54,6 @@
             </div>
         </div>
     </div>
-    <div class="posted-by">Posted By: <a href="http://www.jquery2dotnet.com">Bhaumik Patel</a></div>
 </div>
 </body>
 </html>

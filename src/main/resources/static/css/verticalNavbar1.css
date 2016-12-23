@@ -109,7 +109,7 @@ nav.sidebar, .main{
 
     /* Move nav to full on mouse over*/
     nav.sidebar:hover{
-        margin-left: 0px;
+        margin-left: -40px; /*??*/
     }
     /*for hiden things when navbar hidden*/
     .forAnimate{

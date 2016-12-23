@@ -6,6 +6,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 /**
  * Created by Bakos on 2016-12-20.
@@ -16,14 +18,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http)throws Exception{
-        http.authorizeRequests().mvcMatchers("/").permitAll()
+        http.authorizeRequests().mvcMatchers("/", "/registration").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").permitAll()
-                .and().logout().permitAll();
+                .and().logout().logoutSuccessUrl("/").permitAll();
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
         auth.inMemoryAuthentication().withUser("ala").password("12345").roles("USER");
     }
+
+//    private CsrfTokenRepository csrfTokenRepository()
+//    {
+//        HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
+//        repository.setSessionAttributeName("_csrf");
+//        return repository;
+//    }
 }
