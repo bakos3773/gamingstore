@@ -1,0 +1,43 @@
+<block th:fragment="settings-add-game">
+    <div class="row">
+        <div class="col-xs-12 well">
+            <form role="form" th:action="@{/addGame}" th:object="${game}" method="POST">
+                <fieldset class="form-group">
+                    <label for="name"><h3>Title Game</h3></label>
+                    <input type="text" class="form-control" id="name" th:field="*{name}" rows="1" maxlength="30"></input>
+                    <small class="text-muted">ENTER THE NAME OF THE GAME</small>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="publisher"><h3>Publisher</h3></label>
+                    <input type="text" class="form-control" id="publisher" th:field="*{publisher}" rows="3"></input>
+                    <small class="text-muted">ENTER THE PUBLISHER OF THE GAME</small>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="description"><h3>Directions</h3></label>
+                    <textarea class="form-control" id="description" th:field="*{description}" rows="3"></textarea>
+                    <small class="text-muted">ENTER A DESCRIPTION OF THE GAME</small>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="price"><h3>Price</h3></label>
+                    <input type="text" class="form-control" id="price" th:field="*{price}"></input>
+                    <small class="text-muted">ENTER THE QUANTITY YOU SELL</small>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="amount"><h3>Amount</h3></label>
+                    <input type="text" class="form-control" id="amount" th:field="*{amount}"></input>
+                    <small class="text-muted">ENTER THE PRICE GAME</small>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label class="btn btn-default" for="recipe-editor-file-selector">
+                        <input id="recipe-editor-file-selector" type="file" style="display:none;"/>
+                        Upload Image
+                    </label>
+                    <small class="text-muted">Upload an image of your creation.</small>
+                </fieldset>
+                <button type="submit" class="btn btn-primary" name="save-recipe-button" value="save-recipe-button">Save Changes to This Recipe</button>
+                <button type="submit" class="btn btn-info" name="save-new-recipe-button" value="save-new-recipe-button">Save as a New Recipe</button>
+                <button type="submit" class="btn btn-danger"  name="delete-recipe-button" value="delete-recipe-button">Delete This Recipe</button>
+            </form>
+        </div>
+    </div>
+</block>

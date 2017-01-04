@@ -3,6 +3,7 @@ package com.bakos.configuration;
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -13,7 +14,7 @@ public class DataBaseConfiguration{
 
     public @Bean
     MongoDbFactory mongoDbFactory() throws Exception {
-        return new SimpleMongoDbFactory(new MongoClient(), "test");
+        return new SimpleMongoDbFactory(new MongoClient("localhost",27017), "test");
     }
 
     public @Bean

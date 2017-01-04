@@ -26,7 +26,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-        auth.inMemoryAuthentication().withUser("ala").password("12345").roles("USER");
+        auth.inMemoryAuthentication().withUser("Ala").password("12345").roles("USER");
     }
 
 //    private CsrfTokenRepository csrfTokenRepository()

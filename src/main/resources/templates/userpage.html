@@ -1,17 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="../static/default.css" th:href="@{/css/nabvar1.css}"/>
-    <link rel="stylesheet" type="text/css" href="../static/default.css" th:href="@{/css/verticalNavbar1.css}"/>
-    <title>Title</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" ng-app="myApp">
+<head th:replace="layoutAfterLogin::import-links">
 </head>
-<body>
+<body ng-controller="mainCtrl">
 <!-- nav bar -->
 
 <!-- Navigation -->
@@ -124,274 +115,59 @@
 
 
 
-<div class="container">
-    <div>
-        <nav class="navbar navbar-inverse sidebar" role="navigation">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Brand</a>
+    <div class="container">
+        <div>
+            <nav class="navbar navbar-inverse sidebar" role="navigation">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Brand</a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li ><a href="#tab_home" data-toggle="pill" ng-click="allGames();" ng-init="allGames()">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+                            <li ><a href="#tab_profile" data-toggle="pill">Profile<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
+                            <li ><a href="#tab_messages" data-toggle="pill">Messages<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-envelope"></span></a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <span class="caret"></span><span style="font-size:16px;" class="pull-right                              hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
+                                <ul class="dropdown-menu forAnimate" role="menu">
+                                    <li><a href="#tab_settings_action" data-toggle="pill">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">One more separated link</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li ><a href="#tab_home" data-toggle="pill">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
-                        <li ><a href="#tab_profile" data-toggle="pill">Profile<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
-                        <li ><a href="#tab_messages" data-toggle="pill">Messages<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-envelope"></span></a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <span class="caret"></span><span style="font-size:16px;" class="pull-right                              hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
-                            <ul class="dropdown-menu forAnimate" role="menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">One more separated link</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
+            </nav>
+        </div>
+
+        <div class="tab-content col-md-9">
+            <div class="tab-pane active" id="tab_home">
+                <th:block th:include="fragments/home::home" />
             </div>
-        </nav>
+            <div class="tab-pane" id="tab_profile">
+                <th:block th:include="fragments/profile::profile" />
+            </div>
+            <div class="tab-pane" id="tab_messages">
+                <th:block th:include="fragments/messages::messages" />
+            </div>
+            <div class="tab-pane" id="tab_settings_action">
+                <th:block th:include="fragments/settings::settings-add-game" />
+            </div>
+        </div>
+
     </div>
-
-    <div class="tab-content col-md-9">
-        <div class="tab-pane active" id="tab_home">
-<!--*************************************************************************************************************************************************-->
-            <div>
-                <!--<h2 class="page-header">Search Results</h2>-->
-                <section class="comment-list">
-                    <!-- First Comment -->
-                    <article class="row">
-                        <div class="col-md-2 col-sm-2 hidden-xs">
-                            <figure class="thumbnail">
-                                <img class="img-responsive" src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg" />
-                                <figcaption class="text-center">username</figcaption>
-                            </figure>
-                        </div>
-                        <div class="col-md-10 col-sm-10">
-                            <div class="panel panel-default arrow left">
-                                <div class="panel-body">
-                                    <header class="text-left">
-                                        <div class="comment-user"><i class="fa fa-user"></i> That Guy</div>
-                                        <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Dec 16, 2014</time>
-                                    </header>
-                                    <div class="comment-post">
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna                                                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                        </p>
-                                    </div>
-                                    <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                </section>
-            </div>
-            <div>
-                <!--<h2 class="page-header">Search Results</h2>-->
-                <section class="comment-list">
-                    <!-- First Comment -->
-                    <article class="row">
-                        <div class="col-md-2 col-sm-2 hidden-xs">
-                            <figure class="thumbnail">
-                                <img class="img-responsive" src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg" />
-                                <figcaption class="text-center">username</figcaption>
-                            </figure>
-                        </div>
-                        <div class="col-md-10 col-sm-10">
-                            <div class="panel panel-default arrow left">
-                                <div class="panel-body">
-                                    <header class="text-left">
-                                        <div class="comment-user"><i class="fa fa-user"></i> That Guy</div>
-                                        <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Dec 16, 2014</time>
-                                    </header>
-                                    <div class="comment-post">
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna                                                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                        </p>
-                                    </div>
-                                    <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                </section>
-            </div>
-<!--*********************************************************************************************************************************************            -->
-        </div>
-        <div class="tab-pane" id="tab_profile">
-            <h4>Pane B</h4>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
-        </div>
-        <div class="tab-pane" id="tab_messages">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <i class="fa fa-envelope-o fa-5x"></i>
-                                </div>
-                                <div class="col-xs-6 text-right">
-                                    <p class="announcement-heading">1</p>
-                                    <!--	<p class="announcement-text">Users</p> -->
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer announcement-bottom">
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        Messages
-                                    </div>
-                                    <div class="col-xs-6 text-right">
-                                        <i class="fa fa-arrow-circle-right"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="panel panel-warning">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <i class="fa fa-comment-o fa-5x"></i>
-                                </div>
-                                <div class="col-xs-6 text-right">
-                                    <p class="announcement-heading">12</p>
-                                    <!-- <p class="announcement-text"> Items</p> -->
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer announcement-bottom">
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        Interests
-                                    </div>
-                                    <div class="col-xs-6 text-right">
-                                        <i class="fa fa-arrow-circle-right"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="panel panel-danger">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <i class="fa fa-bell-o fa-5x"></i>
-                                </div>
-                                <div class="col-xs-6 text-right">
-                                    <p class="announcement-heading">18</p>
-                                    <p class="announcement-text">Crawl</p>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer announcement-bottom">
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        Requests
-                                    </div>
-                                    <div class="col-xs-6 text-right">
-                                        <i class="fa fa-arrow-circle-right"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="panel panel-success">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <i class="fa fa-comments fa-5x"></i>
-                                </div>
-                                <div class="col-xs-6 text-right">
-                                    <p class="announcement-heading">56</p>
-                                    <p class="announcement-text"> Orders!</p>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer announcement-bottom">
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        Complete
-                                    </div>
-                                    <div class="col-xs-6 text-right">
-                                        <i class="fa fa-arrow-circle-right"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            tabs
-            <div class="card">
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-                    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
-                    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
-                </ul>
-
-                Tab panes
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="home">
-                        <!--<h2 class="page-header">Search Results</h2>-->
-                        <section class="comment-list">
-                            <!-- First Comment -->
-                            <article class="row">
-                                <div class="col-md-2 col-sm-2 hidden-xs">
-                                    <figure class="thumbnail">
-                                        <img class="img-responsive" src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg" />
-                                        <figcaption class="text-center">username</figcaption>
-                                    </figure>
-                                </div>
-                                <div class="col-md-10 col-sm-10">
-                                    <div class="panel panel-default arrow left">
-                                        <div class="panel-body">
-                                            <header class="text-left">
-                                                <div class="comment-user"><i class="fa fa-user"></i> That Guy</div>
-                                                <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Dec 16, 2014</time>
-                                            </header>
-                                            <div class="comment-post">
-                                                <p>
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna                                                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                                </p>
-                                            </div>
-                                            <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                        </section>
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="profile">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the                          industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
-                    <div role="tabpanel" class="tab-pane" id="messages">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the                         industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It                        has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the                             1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus                                PageMaker including versions of Lorem Ipsum.</div>
-                    <div role="tabpanel" class="tab-pane" id="settings">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the                         industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It                        has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the                             1960s with the release of Letraset sheets containing Lorem Ipsum passage..</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
 </body>
 </html>

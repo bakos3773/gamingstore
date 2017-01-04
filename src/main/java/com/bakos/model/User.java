@@ -1,9 +1,13 @@
 package com.bakos.model;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Document
@@ -16,15 +20,18 @@ public class User {
     private String password;
     private String email;
     private String address;
+    @DBRef
+    private List<Game> games = new ArrayList<>();
 
     public User() {
     }
 
-    public User(String fullName, String password, String email, String address) {
+    public User(String fullName, String password, String email, String address, List<Game> games) {
         this.fullName = fullName;
         this.password = password;
         this.email = email;
         this.address = address;
+        this.games = games;
     }
 
     public String getId() {
@@ -33,7 +40,7 @@ public class User {
 
     public void setId(String id) {
         this.id = id;
-}
+    }
 
     public String getFullName() {
         return fullName;
@@ -67,14 +74,23 @@ public class User {
         this.address = address;
     }
 
+    public List<Game> getGames() {
+        return games;
+    }
+
+    public void setGames(List<Game> games) {
+        this.games = games;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", fullName='" + fullName + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
+                ", games=" + games +
                 '}';
     }
 }
