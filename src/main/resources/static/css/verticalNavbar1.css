@@ -10,7 +10,7 @@ body,html{
 
 /*Remove rounded coners*/
 
-nav.sidebar.navbar {
+nav.sidebhoverar.navbar {
     border-radius: 0px;
 }
 
@@ -109,7 +109,7 @@ nav.sidebar, .main{
 
     /* Move nav to full on mouse over*/
     nav.sidebar:hover{
-        margin-left: -40px; /*??*/
+        margin-left: 0px; /*??*/
     }
     /*for hiden things when navbar hidden*/
     .forAnimate{
@@ -129,7 +129,7 @@ nav.sidebar, .main{
 
     /*Show all nav*/
     nav.sidebar{
-        margin-left: 0px;
+        margin-left: -160px;
         float: left;
     }
     /*Show hidden items on nav*/

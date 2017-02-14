@@ -1,34 +1,37 @@
 <block th:fragment="home">
-    <div ng-repeat="game in games | orderBy: 'game.date':true">
-        <!--<h2 class="page-header">Search Results</h2>-->
-        <section class="comment-list">
-            <!-- First Comment -->
-            <article class="row">
-                <div class="col-md-2 col-sm-2 hidden-xs">
-                    <figure class="thumbnail">
-                        <img class="img-responsive" src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg" />
-                        <figcaption class="text-center">username</figcaption>
-                    </figure>
-                </div>
-                <div class="col-md-10 col-sm-10">
-                    <div class="panel panel-default arrow left">
-                        <div class="panel-body">
-                            <header class="text-left">
-                                <div class="comment-user"><h4><i class="fa fa-user"></i>{{game.publisher}} > <b>{{game.name}}</b> </h4></div>
-                                <time class="comment-date" datetime="game.createdDate"><i class="fa fa-clock-o"></i> <i>{{game.createdDate}}</i></time>
-                                <div><span class="glyphicon glyphicon-usd"/> {{game.price}}PLN</div>
-                                <div>Amount:{{game.amount}}</div>
-                            </header><hr/>
-                            <div class="comment-post">
-                                <p>
-                                    <i>{{game.description}}</i>
-                                </p>
-                            </div>
-                            <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> show</a></p>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </section>
+    <div ng-if="games.length>0">
+        <table class="table">
+            <thead class="thead-inverse">
+            <tr>
+                <th>Name</th>
+                <th></th>
+                <th>Exchange</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody>
+                    <tr ng-repeat="game in games | orderBy: 'game.date':true">
+                        <td>
+                            <a th:href="@{/game/showUserGame/{{game.id}}}">
+                                <div class="col-md-3" style="background-color: aquamarine;">
+                                    <figure class="thumbnail">
+                                            <img class="img-responsive"  th:src="@{/game/image/{{game.imageName}}}"/>
+                                        <figcaption class="text-center">{{game.name}}</figcaption>
+                                    </figure>
+
+                                </div>
+                                <div class="col-md-9">
+                                    <div><span class="glyphicon glyphicon-globe"> language: {{game.languageVersion}} </span></div>
+                                    <div><span class="glyphicon glyphicon-info-sign"> condition: {{game.condition}} </span></div>
+                                    <div><time class="comment-date"><i class="fa fa-clock-o"> added: {{game.createdDate | date:'yyyy-MM-dd HH:mm:ss'}}</i></time></div>
+                                </div>
+                            </a>
+                        </td>
+                        <td><a href="#" th:href="@{/user/showUser/{{game != null ? game.ownerId : ''}}}">{{game.owner}}</a></td>
+                        <td><span class="glyphicon glyphicon-refresh">{{game.exchange}}</span></td>
+                        <td>{{game.price}} PLN</td>
+                    </tr>
+            </tbody>
+        </table>
     </div>
 </block>

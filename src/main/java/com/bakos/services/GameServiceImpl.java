@@ -22,4 +22,12 @@ public class GameServiceImpl implements GameService{
     public List<Game> findAll() {
         return gameRepository.findAll();
     }
+
+    @Override
+    public Game findById(String id) {
+
+        return gameRepository.findOne(id);
+    }
+
+
 }

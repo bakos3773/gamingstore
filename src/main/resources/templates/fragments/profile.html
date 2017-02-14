@@ -1,4 +1,82 @@
 <block th:fragment="profile">
-    <h4>Pane B</h4>
-    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
+    <div class="container col-md-12">
+
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home"><h3>USER</h3></a></li>
+            <li><a data-toggle="tab" href="#games"><h3>GAMES</h3></a></li>
+            <li><a data-toggle="tab" href="#friends"><h3>FRIENDS</h3></a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+                <h3>INFORMATION</h3>
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr><th>Username</th><td>{{infoProfile.username}}</td></tr>
+                        <tr><th>Surname</th><td>{{infoProfile.surname}}</td></tr>
+                        <tr><th>Email</th><td>{{infoProfile.email}}</td></tr>
+                        <tr><th>Place</th><td>{{infoProfile.place}}</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="games" class="tab-pane fade">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>name</th>
+                        <th>publisher</th>
+                        <th>languageVersion</th>
+                        <th>condition</th>
+                        <th>platform</th>
+                        <th>amount</th>
+                        <th>price</th>
+                        <th>exchange</th>
+                        <th>#</th>
+                        <th>#</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="game in infoProfile.games">
+                            <td>{{game.name}}</td>
+                            <td>{{game.publisher}}</td>
+                            <td>{{game.languageVersion}}</td>
+                            <td>{{game.condition}}</td>
+                            <td>{{game.platform}}</td>
+                            <td>{{game.amount}}</td>
+                            <td>{{game.price}}</td>
+                            <td>{{game.exchange}}</td>
+                            <td><a class="btn btn-primary">Change</a></td>
+                            <td><a class="btn btn-primary">DELETE</a> </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="friends" class="tab-pane fade">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Surname</th>
+                        <th>Email</th>
+                        <th>Place</th>
+                        <th>#</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="friend in infoProfile.friends">
+                        <td>{{friend.username}}</td>
+                        <td>{{friend.surname}}</td>
+                        <td>{{friend.email}}</td>
+                        <td>{{friend.place}}</td>
+                        <td><a class="btn btn-primary">DELETE</a> </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+
+
 </block>

@@ -10,4 +10,5 @@ import java.util.List;
 public interface GameService {
     public void save(Game game);
     public List<Game> findAll();
+    public Game findById(String id);
 }

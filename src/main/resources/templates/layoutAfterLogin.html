@@ -3,6 +3,10 @@
 <head th:fragment="import-links">
     <meta charset="UTF-8" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <!--<link rel="stylesheet" href="/resources/demos/style.css"/>-->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
@@ -12,8 +16,30 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="../static/default.css" th:href="@{/css/nabvar1.css}"/>
     <link rel="stylesheet" type="text/css" href="../static/default.css" th:href="@{/css/verticalNavbar1.css}"/>
-    <script src="../static/js/angularfile.js" th:src="@{/js/angularfile.js}"></script>
-    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/other.css" th:href="@{/css/other.css}" />
+    <script th:src="@{/js/angularfile.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="../static/js/webSocket.js" th:src="@{/js/webSocket.js}"></script>
+
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            $('#communicatorContent').draggable();
+
+            document.getElementsByClassName("sidebar")[0].addEventListener("mouseover", function () {
+                document.getElementById("communicator-block").style.display = 'none';
+            });
+
+            document.getElementsByClassName("sidebar")[0].addEventListener("mouseout", function () {
+//                var timer = setTimeout(function() {
+//                    var theWaitCell = document.getElementById('communicator-block');
+//                    theWaitCell.style.display = "inline";
+//                }, 1000);
+                document.getElementById('communicator-block').style.display = "inline";
+            });
+
+        });
+    </script>
 </head>
 <body>
 

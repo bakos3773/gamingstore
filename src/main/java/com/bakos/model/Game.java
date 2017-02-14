@@ -4,7 +4,9 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.Date;
 
 @Document
@@ -16,7 +18,8 @@ public class Game {
     private String publisher;
     private String description;
     private String languageVersion;
-    private String state;
+    private String condition;
+    private String platform;
     private String owner;
     private String ownerId;
     @CreatedDate
@@ -25,37 +28,11 @@ public class Game {
     private float price;
     private boolean exchange;
 
+    private String imageName;
+
     public Game() {
     }
 
-    public Game(String name, String publisher, String description, String languageVersion, String state, String owner, String ownerId, Date createdDate, int amount, float price, boolean exchange) {
-        this.name = name;
-        this.publisher = publisher;
-        this.description = description;
-        this.languageVersion = languageVersion;
-        this.state = state;
-        this.owner = owner;
-        this.ownerId = ownerId;
-        this.createdDate = createdDate;
-        this.amount = amount;
-        this.price = price;
-        this.exchange = exchange;
-    }
-
-    public Game(String id, String name, String publisher, String description, String languageVersion, String state, String owner, String ownerId, Date createdDate, int amount, float price, boolean exchange) {
-        this.id = id;
-        this.name = name;
-        this.publisher = publisher;
-        this.description = description;
-        this.languageVersion = languageVersion;
-        this.state = state;
-        this.owner = owner;
-        this.ownerId = ownerId;
-        this.createdDate = createdDate;
-        this.amount = amount;
-        this.price = price;
-        this.exchange = exchange;
-    }
 
     public String getId() {
         return id;
@@ -137,12 +114,12 @@ public class Game {
         this.languageVersion = languageVersion;
     }
 
-    public String getState() {
-        return state;
+    public String getCondition() {
+        return condition;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setCondition(String condition) {
+        this.condition = condition;
     }
 
     public boolean isExchange() {
@@ -151,5 +128,21 @@ public class Game {
 
     public void setExchange(boolean exchange) {
         this.exchange = exchange;
+    }
+
+    public String getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(String platform) {
+        this.platform = platform;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 }

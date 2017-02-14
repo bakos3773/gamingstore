@@ -1,13 +1,14 @@
 package com.bakos.controllers;
 
+import com.bakos.model.Friend;
 import com.bakos.model.Game;
 import com.bakos.model.User;
-import com.bakos.services.GameService;
-import com.bakos.services.UserSearchService;
-import com.bakos.services.UserService;
+import com.bakos.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +18,7 @@ import java.security.Principal;
 import java.util.List;
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -26,36 +28,32 @@ public class UserController {
     GameService gameService;
 
     @Autowired
+    FriendService friendService;
+
+    @Autowired
     UserSearchService userSearchService;
 
-    @RequestMapping("/login")
-    public String login(){
+    @Autowired
+    EmailService emailService;
 
-        System.out.println("Wszedlem do login");
-        return "login";
-    }
 
     @RequestMapping("/userpage")
     public String afterLogin(Model model){
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        List<Friend> friends = userSearchService.findByName(auth.getName()).getFriends();
+        model.addAttribute("friends", friends);
         model.addAttribute("game", new Game());
         return "userpage";
     }
 
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String registration(Model model){
+    @RequestMapping(value = "/getAllFriends", produces = "application/json")
+    @ResponseBody
+    public ResponseEntity<List<Friend>> getAllFriends(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        List<Friend> friends = userSearchService.findByName(auth.getName()).getFriends();
 
-        model.addAttribute("user", new User());
-        return "registration";
-    }
-
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@ModelAttribute("user") User user, BindingResult result){
-
-        System.out.println("Wszedlem do registration after user="+user.getFullName() + " addres="+user.getAddress());
-
-        userService.save(user);
-        return "redirect:/login";
+        return new ResponseEntity<List<Friend>>(friends, HttpStatus.OK);
     }
 
     public void findAll(){
@@ -64,17 +62,7 @@ public class UserController {
             System.out.println(all.getId()+" => "+all.getEmail()+" "+all.getPassword());
     }
 
-    @RequestMapping(value = "/addGame", method = RequestMethod.POST)
-    @ResponseStatus(value = HttpStatus.OK)
-    public String addGame(@ModelAttribute("game") Game game, BindingResult result, Principal principal){
 
-
-        userSearchService.update("Ala", game);
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++");
-//        findAll();
-
-        return "userpage";
-    }
 
     @RequestMapping("/getAllUsersGame")
     @ResponseBody
@@ -83,5 +71,33 @@ public class UserController {
         List<Game> games = gameService.findAll();
 
         return new ResponseEntity<List<Game>>(games, HttpStatus.OK);
+    }
+
+    @RequestMapping("/adminPanel")
+    public String adminPanel(){
+
+        return "adminPanel";
+    }
+
+    @RequestMapping("/showUser/{id}")
+    public String showUser(@PathVariable("id")String id, Model model){
+
+        User user = userService.findById(id);
+        List<Game> allUserGames = user.getGames();
+        model.addAttribute("user", user);
+        model.addAttribute("games", allUserGames);
+        return "showUser";
+    }
+
+    @RequestMapping("/addFriend/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void addFriend(@PathVariable("id")String id){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userSearchService.findByName(auth.getName());
+        User temp = userService.findById(id);
+        Friend friend = new Friend(temp.getId(), temp.getUsername(), temp.getSurname());
+        friendService.save(friend);
+        user.getFriends().add(friend);
+        userSearchService.update(user);
     }
 }

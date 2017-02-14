@@ -1,7 +1,7 @@
 <block th:fragment="settings-add-game">
     <div class="row">
         <div class="col-xs-12 well">
-            <form role="form" th:action="@{/addGame}" th:object="${game}" method="POST">
+            <form role="form" th:action="@{/game/addGame}" th:object="${game}" method="POST" enctype="multipart/form-data">
                 <fieldset class="form-group">
                     <label for="name"><h3>Title Game</h3></label>
                     <input type="text" class="form-control" id="name" th:field="*{name}" rows="1" maxlength="30"></input>
@@ -27,17 +27,16 @@
                     <input type="text" class="form-control" id="amount" th:field="*{amount}"></input>
                     <small class="text-muted">ENTER THE PRICE GAME</small>
                 </fieldset>
-                <fieldset class="form-group">
-                    <label class="btn btn-default" for="recipe-editor-file-selector">
-                        <input id="recipe-editor-file-selector" type="file" style="display:none;"/>
-                        Upload Image
-                    </label>
-                    <small class="text-muted">Upload an image of your creation.</small>
-                </fieldset>
-                <button type="submit" class="btn btn-primary" name="save-recipe-button" value="save-recipe-button">Save Changes to This Recipe</button>
-                <button type="submit" class="btn btn-info" name="save-new-recipe-button" value="save-new-recipe-button">Save as a New Recipe</button>
-                <button type="submit" class="btn btn-danger"  name="delete-recipe-button" value="delete-recipe-button">Delete This Recipe</button>
+                <br/>
+                Image to upload: File to upload: <input type="file" name="picture" />
+                <button type="submit" class="btn btn-primary" name="save-recipe-button" value="save-recipe-button">ADD</button>
+                <hr/>
             </form>
+
+            <!--<form th:action="@{/game/addGame}" method="POST" enctype="multipart/form-data">-->
+                <!--File to upload: <input type="file" name="zdjecie" />-->
+                <!--<button type="submit" class="btn btn-primary" name="save-recipe-button" value="save-recipe-button">ADD</button>- -->
+            <!--</form>-->
         </div>
     </div>
 </block>

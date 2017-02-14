@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" ng-app="myApp">
+<head th:replace="layoutAfterLogin::import-links">
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body ng-controller="mainCtrl">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation" th:include="fragments/navbarUserPage::up-menu1" />
+
+<!-- Second Nav -->
+<nav class="navbar navbar-default navbar-static-top" role="navigation" th:include="fragments/navbarUserPage::up-menu2" />
+
+
+    <div class="col-md-2 col-sm-2 hidden-xs">
+        <figure class="thumbnail">
+            <img class="img-responsive" src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg" />
+            <figcaption class="text-center" th:text="${user.username}"> username</figcaption>
+        </figure>
+        <a href="#" class="btn btn-primary sameWidth"><span class="glyphicon glyphicon-refresh"></span> Exchange</a><br/>
+        <a href="#" class="btn btn-primary sameWidth"><span class="glyphicon glyphicon-envelope"></span> Send Message</a><br/>
+        <a href="/user/addFriend/${user.id}" th:href="@{'/user/addFriend/'+${user.id}}" class="btn btn-primary sameWidth"><span class="glyphicon glyphicon-plus"></span> Add to friends</a>
+        <hr/>
+        <a href="#" class="btn btn-primary sameWidth"><span class="glyphicon glyphicon-user"></span> About me</a><br/>
+        <a href="#" class="btn btn-primary sameWidth"><span class="glyphicon glyphicon-ok"></span> Looking for</a><br/>
+        <a href="#" class="btn btn-primary sameWidth"><span class="glyphicon glyphicon-remove"></span> Don't want</a><br/>
+    </div>
+    <div class="col-md-10 col-sm-10" style="background-color: #60B078; padding-top: 100px;">
+        <div>
+            <a href="#" class="btn btn-primary searchingButtons">All</a>
+            <a href="#" class="btn btn-primary searchingButtons"><span class="glyphicon glyphicon-shopping-cart"></span> Buy now</a>
+            <a href="#" class="btn btn-primary searchingButtons"><span class="glyphicon glyphicon-refresh"></span> Exchange</a>
+        </div>
+        <div class="form-group" style="width: 20%">
+            <label for="sortingUserGame">Sort by:</label>
+            <select class="form-control" id="sortingUserGame">
+                <option>Latest</option>
+                <option>Price ASC <span class="glyphicon glyphicon-arrow-up"></span></option>
+                <option>Price DESC <span class="glyphicon glyphicon-arrow-down"></span></option>
+                <option>Name ASC <span class="glyphicon glyphicon-arrow-up"></span></option>
+                <option>Name DESC <span class="glyphicon glyphicon-arrow-down"></span></option>
+            </select>
+        </div><br/><br/><br/>
+
+        <table class="table">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>Name</th>
+                    <th></th>
+                    <th>Exchange</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="game : ${games}">
+                    <td>
+                        <a th:href="@{'/game/showUserGame/'+${game.id}}">
+                            <div class="col-md-3" style="background-color: aquamarine;">
+                                <figure class="thumbnail">
+                                    <img class="img-responsive" th:src="@{'/game/image/'+${game.imageName}}" />
+                                    <figcaption class="text-center"><span th:text="${game.name}"></span></figcaption>
+                                </figure>
+
+                            </div>
+                            <div class="col-md-9" style="background-color: #55acee;">
+                                <div>language: <span th:text="${game.languageVersion}"></span></div>
+                                <div>condition: <span th:text="${game.condition}"></span></div>
+                                <div><time class="comment-date"><i class="fa fa-clock-o"> added: <span th:text="${game.createdDate}"></span></i></time></div>
+                            </div>
+                        </a>
+                    </td>
+                    <td></td>
+                    <td><span th:text="${game.exchange}"></span></td>
+                    <td><span th:text="${game.price} + ' PLN'"></span></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</body>
+</html>

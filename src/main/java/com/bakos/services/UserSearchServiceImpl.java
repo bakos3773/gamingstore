@@ -34,9 +34,19 @@ public class UserSearchServiceImpl implements UserSearchService {
     }
 
     @Override
-    public void update(String name, Game game) {
+    public void addGame(User user, Game game) {
         game.setCreatedDate(new Date());
         gameService.save(game);
-        userSearchRepository.update(name, game);
+        userSearchRepository.addGame(user, game);
+    }
+
+    @Override
+    public void update(User user) {
+        userSearchRepository.update(user);
+    }
+
+    @Override
+    public User findByGamesId(String id) {
+        return userSearchRepository.findByGamesId(id);
     }
 }

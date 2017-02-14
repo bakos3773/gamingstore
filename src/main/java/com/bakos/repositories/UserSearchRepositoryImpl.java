@@ -27,7 +27,7 @@ public class UserSearchRepositoryImpl implements UserSearchRepository{
 
     @Override
     public User findByName(String name) {
-        User user = mongoTemplate.findOne(new Query(Criteria.where("fullName").is("Ala")), User.class);
+        User user = mongoTemplate.findOne(new Query(Criteria.where("username").is(name)), User.class);
         return user;
     }
 
@@ -37,11 +37,23 @@ public class UserSearchRepositoryImpl implements UserSearchRepository{
     }
 
     @Override
-    public void update(String name, Game game) {
-        User user = mongoTemplate.findOne(Query.query(Criteria.where("fullName").is("Ala")), User.class);
+    public void addGame(User user, Game game) {
         user.getGames().add(game);
 
         mongoTemplate.save(user);
+    }
+
+    @Override
+    public void update(User user) {
+        mongoTemplate.save(user);
+    }
+
+    @Override
+    public User findByGamesId(String id) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("games.id").is(id));
+        User user = mongoTemplate.findOne(query, User.class);
+        return user;
     }
 
 

@@ -1,0 +1,36 @@
+.searchingButtons{
+    display: inline-block;
+}
+
+.sameWidth{
+    width: 100%;
+    border-radius: 25px;
+}
+
+body#bodyParalax{
+    margin: 0;
+    font-family: Roboto, SansSerif;
+    height: 100%;
+    background-color: black;
+
+}
+
+section.image {
+    height: 600px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+section.text {
+    max-width: 1170px;
+    padding: 20px;
+    padding: 20px 0;
+    position: relative;
+}
+
+section.text.left .content {
+    margin-left: 0;
+    margin-right: 50%;
+}

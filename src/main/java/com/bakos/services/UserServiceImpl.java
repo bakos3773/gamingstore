@@ -1,5 +1,6 @@
 package com.bakos.services;
 
+import com.bakos.model.Game;
 import com.bakos.model.User;
 import com.bakos.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,16 @@ public class UserServiceImpl implements UserService
     public void deleteAll() {
         userRepository.deleteAll();
     }
+
+    @Override
+    public User getUserByConfirmationId(String confirmationId) {
+        return userRepository.findByConfirmationId(confirmationId);
+    }
+
+    @Override
+    public User findById(String id) {
+        return userRepository.findOne(id);
+    }
+
 
 }

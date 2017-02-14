@@ -1,0 +1,133 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org" ng-app="myApp">
+<head th:replace="layoutAfterLogin::import-links">
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body ng-controller="mainCtrl">
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation" th:include="fragments/navbarUserPage::up-menu1" />
+
+    <!-- Second Nav -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" th:include="fragments/navbarUserPage::up-menu2" />
+
+
+    <div class="container" style="width: 100%">
+
+        <div><h3><a href="" th:text="${game != null ? game.name : ''}">Nazwa gry</a></h3></div>
+
+        <div class="tab-content">
+            <div class="col-md-7" style="background-color: #2ecc71">
+                <!--*********************************************************************************************************************-->
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                        <li data-target="#myCarousel" data-slide-to="3"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <img src="img_chania.jpg" alt="Chania" width="460" height="345"/>
+                        </div>
+
+                        <div class="item">
+                            <img src="img_chania2.jpg" alt="Chania" width="460" height="345"/>
+                        </div>
+
+                        <div class="item">
+                            <img src="img_flower.jpg" alt="Flower" width="460" height="345"/>
+                        </div>
+
+                        <div class="item">
+                            <img src="img_flower2.jpg" alt="Flower" width="460" height="345"/>
+                        </div>
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                <!--*********************************************************************************************************************-->
+            </div>
+            <div class="col-md-5">
+                <!--*********************************************************************************************************************-->
+                <div style="border: dotted">
+                    <p><span th:text="${game != null ? game.price : ''}"></span>PLN</p>
+                    <p><button class="btn btn-success">Buy Now</button></p>
+                    <p><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalExchange">Exchange</button></p>
+                </div>
+                <div>
+                    <p><a href="#" th:href="@{'/user/showUser/' + ${user != null ? user.id : ''}}" th:text="${user != null ? user.username : ''}">Kto wystawil</a></p>
+                    <p><a href="#">Contact with the owner</a></p>
+                    <p><a href="#">Suggest another price</a></p>
+                </div>
+                <!--*********************************************************************************************************************-->
+            </div>
+
+        </div>
+    </div><hr/>
+    <div class="content-box" style="padding-left: 5%">
+        <!--*********************************************************************************************************************-->
+            <p>
+                language:
+                <strong th:text="${game != null ? game.languageVersion : ''}">polska</strong>
+            </p>
+            <p>
+                condidion:
+                <strong th:text="${game != null ? game.condition : ''}"></strong>
+            </p>
+            <p>
+                place:
+                <strong th:text="${user != null ? user.place : ''}"></strong>
+            </p>
+            <p>
+                shipment:
+            </p>
+            <p>
+                added:
+                <strong class="timestamp" th:text="${game != null ? game.createdDate : ''}"></strong>
+            </p>
+        <!--*********************************************************************************************************************-->
+    </div><hr/>
+    <div class="content-box" style="padding-left: 5%">
+
+        <h4>Informations about game<strong><a href="" th:text="${game != null ? game.name : ''}">Nazwa gry</a></strong></h4>
+        <p th:text="${game != null ? game.description : ''}"></p>
+
+        <a href="#" class="show-more">62 recenzji Nazwa Gry</a>
+
+    </div>
+<!--***************************************************************-->
+        <!-- Modal -->
+        <div class="modal fade" id="modalExchange" role="dialog">
+            <div class="modal-dialog">
+                <form action=""  method="post">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Modal Header</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Some text in the modal.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+</body>
+</html>
